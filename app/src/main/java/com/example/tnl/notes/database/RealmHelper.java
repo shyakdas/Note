@@ -1,4 +1,4 @@
-package com.example.tnl.notes.realm;
+package com.example.tnl.notes.database;
 
 import com.example.tnl.notes.model.DataModel;
 

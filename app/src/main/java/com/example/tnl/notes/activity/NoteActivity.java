@@ -2,21 +2,25 @@ package com.example.tnl.notes.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.tnl.notes.R;
+import com.example.tnl.notes.Utils.Constant;
 import com.example.tnl.notes.adapter.DataAdapter;
 import com.example.tnl.notes.model.DataModel;
-import com.example.tnl.notes.realm.RealmHelper;
+import com.example.tnl.notes.database.RealmHelper;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.example.tnl.notes.Utils.Constant.REQUEST_CODE;
 
 public class NoteActivity extends AppCompatActivity {
 
@@ -35,14 +39,14 @@ public class NoteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_note);
         ButterKnife.bind(this);
         dataAdapter = new DataAdapter(new ArrayList<DataModel>(), this);
-        if (getIntent().hasExtra("extra")) {
-            model = (DataModel) getIntent().getSerializableExtra("extra");
-            mSave.setText("Update");
+        if (getIntent().hasExtra(Constant.EXTRA)) {
+            model = (DataModel) getIntent().getSerializableExtra(Constant.EXTRA);
+            mSave.setText(R.string.update);
             mTitle.setText(model.getTitle());
             mNotes.setText(model.getNotes());
-            getSupportActionBar().setTitle("Edit Note");
+            getSupportActionBar().setTitle(R.string.edit_note);
         } else {
-            getSupportActionBar().setTitle("New Note");
+            getSupportActionBar().setTitle(R.string.new_note);
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -51,14 +55,19 @@ public class NoteActivity extends AppCompatActivity {
     public void saveNotes() {
         String title = mTitle.getText().toString();
         String note = mNotes.getText().toString();
-        if (title == null || note == null) {
-            Toast.makeText(NoteActivity.this, "Please enter Title and Note", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(title) && TextUtils.isEmpty(note)) {
+            Toast.makeText(NoteActivity.this, R.string.titile_note_empty, Toast.LENGTH_SHORT).show();
+        } else if (TextUtils.isEmpty(title)) {
+            Toast.makeText(NoteActivity.this, R.string.title_emplty, Toast.LENGTH_SHORT).show();
+        } else if (TextUtils.isEmpty(note)) {
+            Toast.makeText(NoteActivity.this, R.string.note_empty, Toast.LENGTH_SHORT).show();
         } else {
+            Toast.makeText(NoteActivity.this, R.string.note_saved, Toast.LENGTH_SHORT).show();
             if (model != null) {
                 model.setTitle(title);
                 model.setNotes(note);
                 RealmHelper.getInstance().add(model);
-                setResult(100);
+                setResult(REQUEST_CODE);
                 finish();
                 return;
             }
@@ -67,7 +76,7 @@ public class NoteActivity extends AppCompatActivity {
             model.setNotes(note);
             model.setId(RealmHelper.getInstance().getSize());
             RealmHelper.getInstance().add(model);
-            setResult(100);
+            setResult(REQUEST_CODE);
             finish();
         }
     }

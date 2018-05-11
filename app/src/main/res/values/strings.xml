@@ -4,4 +4,10 @@
     <string name="title">Title</string>
     <string name="save_button">Save</string>
     <string name="update">Update</string>
+    <string name="edit_note">Edit Note</string>
+    <string name="new_note">New Note</string>
+    <string name="titile_note_empty">Please enter Title and Note</string>
+    <string name="title_emplty">Please enter title</string>
+    <string name="note_empty">Please enter Note</string>
+    <string name="note_saved">Your Note Saved</string>
 </resources>

@@ -1,17 +1,16 @@
 package com.example.tnl.notes.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import com.example.tnl.notes.R;
 import com.example.tnl.notes.adapter.DataAdapter;
 import com.example.tnl.notes.model.DataModel;
-import com.example.tnl.notes.realm.RealmHelper;
+import com.example.tnl.notes.database.RealmHelper;
 
 import java.util.ArrayList;
 import java.util.List;

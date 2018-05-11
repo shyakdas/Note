@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tnl.notes.R;
+import com.example.tnl.notes.Utils.Constant;
 import com.example.tnl.notes.activity.NoteActivity;
 import com.example.tnl.notes.model.DataModel;
 
@@ -20,6 +21,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.example.tnl.notes.Utils.Constant.EXTRA;
+import static com.example.tnl.notes.Utils.Constant.REQUEST_CODE;
 
 /**
  * Created by tnl on 12/3/2017;
@@ -87,7 +91,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.NoteViewHolder
         @OnClick(R.id.item_view)
         public void itemClick() {
             (mConext).startActivityForResult(new Intent(mConext, NoteActivity.class)
-                    .putExtra("extra", model), 100);
+                    .putExtra(EXTRA, model), REQUEST_CODE);
         }
     }
 }
