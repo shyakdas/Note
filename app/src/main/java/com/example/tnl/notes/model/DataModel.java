@@ -15,7 +15,8 @@ import io.realm.annotations.PrimaryKey;
  * Created by tnl on 12/3/2017;
  */
 
-public class DataModel extends RealmObject implements Serializable{
+public class DataModel extends RealmObject implements Serializable {
+
     String title;
     String notes;
     long dateTime;
@@ -39,7 +40,6 @@ public class DataModel extends RealmObject implements Serializable{
         this.notes = notes;
         this.dateTime = dateTime;
         this.id = id;
-
     }
 
     public long getDateTime() {
@@ -49,7 +49,6 @@ public class DataModel extends RealmObject implements Serializable{
     public void setDateTime(long dateTime) {
         this.dateTime = dateTime;
     }
-
 
     public String getTitle() {
         return title;
@@ -68,13 +67,8 @@ public class DataModel extends RealmObject implements Serializable{
     }
 
     public String getDateTimeFormatted(Context context) {
-        /*SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss",
-                context.getResources().getConfiguration().locale);
-        simpleDateFormat.setTimeZone(TimeZone.getDefault());
-        return simpleDateFormat.format(new Date(dateTime));*/
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         return simpleDateFormat.format(calendar.getTime());
-
     }
 }

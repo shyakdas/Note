@@ -20,6 +20,7 @@ import java.util.List;
  */
 
 public class DataAdapter extends RecyclerView.Adapter<DataAdapter.NoteViewHolder> {
+
     public List<DataModel> mList;
     private Activity mConext;
 
@@ -27,12 +28,6 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.NoteViewHolder
         this.mList = list;
         this.mConext = context;
     }
-
-//    public void add(String title, String note, long dateTime) {
-//        DataModel dataModel = new DataModel(title, note, dateTime);
-//        mList.add(dataModel);
-//        notifyDataSetChanged();
-//    }
 
     public void add(List<DataModel> dataModel) {
         mList.clear();
@@ -59,8 +54,8 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.NoteViewHolder
         return mList.size();
     }
 
-
     class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
         public TextView mTitle, mNote, mTime;
         private DataModel model;
 
@@ -75,7 +70,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.NoteViewHolder
 
         @Override
         public void onClick(View view) {
-            ((Activity)mConext).startActivityForResult(new Intent(mConext, NoteActivity.class).putExtra("extra",model),100);
+            (mConext).startActivityForResult(new Intent(mConext, NoteActivity.class).putExtra("extra", model), 100);
         }
 
         public void bind(int position) {
@@ -86,6 +81,3 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.NoteViewHolder
         }
     }
 }
-
-
-

@@ -20,7 +20,6 @@ public class NoteActivity extends AppCompatActivity {
     private EditText mNotes;
     private Button mSave;
     private DataAdapter dataAdapter;
-
     private DataModel model;
 
     @Override
@@ -30,7 +29,6 @@ public class NoteActivity extends AppCompatActivity {
         mTitle = findViewById(R.id.titleOfNote);
         mNotes = findViewById(R.id.writeNote);
         mSave = findViewById(R.id.buttonSave);
-
         dataAdapter = new DataAdapter(new ArrayList<DataModel>(), this);
 
         if (getIntent().hasExtra("extra")) {
@@ -70,9 +68,7 @@ public class NoteActivity extends AppCompatActivity {
 
             }
         });
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
     }
 
     @Override
@@ -84,6 +80,5 @@ public class NoteActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
 }

@@ -1,14 +1,10 @@
 package com.example.tnl.notes.realm;
 
-import android.app.Application;
-import android.content.Context;
-
 import com.example.tnl.notes.model.DataModel;
 
 import java.util.List;
 
 import io.realm.Realm;
-import io.realm.RealmModel;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
@@ -57,7 +53,7 @@ public class RealmHelper {
         return realmResults;
     }
 
-    public int getSize(){
+    public int getSize() {
         realm = Realm.getDefaultInstance();
         RealmResults<DataModel> realmResults;
         try {

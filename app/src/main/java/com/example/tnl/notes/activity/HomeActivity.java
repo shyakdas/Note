@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
+
     private android.support.design.widget.FloatingActionButton mFloatingActionButton;
     private DataAdapter dataAdapter;
     private RecyclerView mRecylerView;
@@ -48,16 +49,13 @@ public class HomeActivity extends AppCompatActivity {
     private void populateDataToRecyclerView() {
         List<DataModel> results = RealmHelper.getInstance().fetchData();
         if (results == null || results.size() == 0) {
-//            dataAdapter.add("", "", 1);
         } else {
             List<DataModel> models = new ArrayList<>();
-
             for (DataModel model : results) {
                 DataModel dataModel = new DataModel(model.getTitle(), model.getNotes(), model.getDateTime(), model.getId());
                 models.add(dataModel);
             }
             dataAdapter.add(models);
-
         }
     }
 
@@ -66,5 +64,4 @@ public class HomeActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         populateDataToRecyclerView();
     }
-
 }
