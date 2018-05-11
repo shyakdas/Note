@@ -1,9 +1,8 @@
 package com.example.tnl.notes.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -15,10 +14,18 @@ import com.example.tnl.notes.realm.RealmHelper;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class NoteActivity extends AppCompatActivity {
-    private EditText mTitle;
-    private EditText mNotes;
-    private Button mSave;
+
+    @BindView(R.id.titleOfNote)
+    EditText mTitle;
+    @BindView(R.id.writeNote)
+    EditText mNotes;
+    @BindView(R.id.buttonSave)
+    Button mSave;
     private DataAdapter dataAdapter;
     private DataModel model;
 
@@ -26,11 +33,8 @@ public class NoteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
-        mTitle = findViewById(R.id.titleOfNote);
-        mNotes = findViewById(R.id.writeNote);
-        mSave = findViewById(R.id.buttonSave);
+        ButterKnife.bind(this);
         dataAdapter = new DataAdapter(new ArrayList<DataModel>(), this);
-
         if (getIntent().hasExtra("extra")) {
             model = (DataModel) getIntent().getSerializableExtra("extra");
             mSave.setText("Update");
@@ -40,35 +44,32 @@ public class NoteActivity extends AppCompatActivity {
         } else {
             getSupportActionBar().setTitle("New Note");
         }
-
-        mSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String title = mTitle.getText().toString();
-                String note = mNotes.getText().toString();
-                if (title == null || note == null) {
-                    Toast.makeText(NoteActivity.this, "Please enter Title and Note", Toast.LENGTH_SHORT).show();
-                } else {
-                    if (model != null) {
-                        model.setTitle(title);
-                        model.setNotes(note);
-                        RealmHelper.getInstance().add(model);
-                        setResult(100);
-                        finish();
-                        return;
-                    }
-                    DataModel model = new DataModel();
-                    model.setTitle(title);
-                    model.setNotes(note);
-                    model.setId(RealmHelper.getInstance().getSize());
-                    RealmHelper.getInstance().add(model);
-                    setResult(100);
-                    finish();
-                }
-
-            }
-        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @OnClick(R.id.buttonSave)
+    public void saveNotes() {
+        String title = mTitle.getText().toString();
+        String note = mNotes.getText().toString();
+        if (title == null || note == null) {
+            Toast.makeText(NoteActivity.this, "Please enter Title and Note", Toast.LENGTH_SHORT).show();
+        } else {
+            if (model != null) {
+                model.setTitle(title);
+                model.setNotes(note);
+                RealmHelper.getInstance().add(model);
+                setResult(100);
+                finish();
+                return;
+            }
+            DataModel model = new DataModel();
+            model.setTitle(title);
+            model.setNotes(note);
+            model.setId(RealmHelper.getInstance().getSize());
+            RealmHelper.getInstance().add(model);
+            setResult(100);
+            finish();
+        }
     }
 
     @Override

@@ -16,9 +16,14 @@ import com.example.tnl.notes.realm.RealmHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class HomeActivity extends AppCompatActivity {
 
-    private android.support.design.widget.FloatingActionButton mFloatingActionButton;
+    @BindView(R.id.floatingActionButton)
+    android.support.design.widget.FloatingActionButton mFloatingActionButton;
     private DataAdapter dataAdapter;
     private RecyclerView mRecylerView;
     private LinearLayoutManager layoutManager;
@@ -27,14 +32,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        mFloatingActionButton = findViewById(R.id.floatingActionButton);
-        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent newNoteCreation = new Intent(HomeActivity.this, NoteActivity.class);
-                startActivityForResult(newNoteCreation, 100);
-            }
-        });
+        ButterKnife.bind(this);
         mRecylerView = findViewById(R.id.noteList);
         layoutManager = new LinearLayoutManager(HomeActivity.this);
         layoutManager.setReverseLayout(true);
@@ -44,6 +42,12 @@ public class HomeActivity extends AppCompatActivity {
         mRecylerView.setAdapter(dataAdapter);
         mRecylerView.setHasFixedSize(true);
         populateDataToRecyclerView();
+    }
+
+    @OnClick(R.id.floatingActionButton)
+    public void floatingAction() {
+        Intent newNoteCreation = new Intent(HomeActivity.this, NoteActivity.class);
+        startActivityForResult(newNoteCreation, 100);
     }
 
     private void populateDataToRecyclerView() {

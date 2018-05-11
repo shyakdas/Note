@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -20,7 +21,7 @@
         android:layout_marginLeft="150dp"
         android:layout_marginTop="15dp"
         android:layout_toRightOf="@id/titleView"
-        android:text="Date and Time"/>
+        android:text="Date and Time" />
 
     <TextView
         android:id="@+id/noteView"

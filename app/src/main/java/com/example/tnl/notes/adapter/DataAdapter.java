@@ -7,13 +7,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tnl.notes.R;
 import com.example.tnl.notes.activity.NoteActivity;
 import com.example.tnl.notes.model.DataModel;
 
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by tnl on 12/3/2017;
@@ -54,23 +60,21 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.NoteViewHolder
         return mList.size();
     }
 
-    class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class NoteViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView mTitle, mNote, mTime;
+        @BindView(R.id.titleView)
+        TextView mTitle;
+        @BindView(R.id.noteView)
+        TextView mNote;
+        @BindView(R.id.timeView)
+        TextView mTime;
+        @BindView(R.id.item_view)
+        RelativeLayout mItemView;
         private DataModel model;
 
         public NoteViewHolder(View itemView) {
             super(itemView);
-            mTitle = itemView.findViewById(R.id.titleView);
-            mNote = itemView.findViewById(R.id.noteView);
-            mTime = itemView.findViewById(R.id.timeView);
-            itemView.setOnClickListener(this);
-        }
-
-
-        @Override
-        public void onClick(View view) {
-            (mConext).startActivityForResult(new Intent(mConext, NoteActivity.class).putExtra("extra", model), 100);
+            ButterKnife.bind(this, itemView);
         }
 
         public void bind(int position) {
@@ -78,6 +82,12 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.NoteViewHolder
             mTitle.setText(model.getTitle());
             mNote.setText(model.getNotes());
             mTime.setText(model.getDateTimeFormatted(mConext) + "");
+        }
+
+        @OnClick(R.id.item_view)
+        public void itemClick() {
+            (mConext).startActivityForResult(new Intent(mConext, NoteActivity.class)
+                    .putExtra("extra", model), 100);
         }
     }
 }
