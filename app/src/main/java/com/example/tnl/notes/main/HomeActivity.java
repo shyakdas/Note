@@ -1,4 +1,4 @@
-package com.example.tnl.notes.activity;
+package com.example.tnl.notes.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import com.example.tnl.notes.R;
 import com.example.tnl.notes.adapter.DataAdapter;
 import com.example.tnl.notes.model.DataModel;
 import com.example.tnl.notes.database.RealmHelper;
+import com.example.tnl.notes.notes.NoteActivity;
 
 import java.util.ArrayList;
 import java.util.List;

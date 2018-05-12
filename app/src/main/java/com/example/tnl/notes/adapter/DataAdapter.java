@@ -9,11 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.tnl.notes.R;
-import com.example.tnl.notes.Utils.Constant;
-import com.example.tnl.notes.activity.NoteActivity;
+import com.example.tnl.notes.notes.NoteActivity;
 import com.example.tnl.notes.model.DataModel;
 
 import java.util.List;
